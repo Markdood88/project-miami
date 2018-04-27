@@ -8,6 +8,7 @@ Projectile::Projectile(float x, float y, float rad, int lifeTime, float speed, f
     this->dir = rad;
     this->lifeTime = lifeTime;
     this->speed = speed;
+	this->type = bullet;
 }
 
 Projectile::~Projectile(){

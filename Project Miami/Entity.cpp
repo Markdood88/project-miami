@@ -18,8 +18,8 @@ Entity::Entity(bool c){
     radius = 40;
     }
     else{
-    length = 40;
-    width = 40;        
+    length = .1;
+    width = .1;        
     }
 }
 
@@ -29,11 +29,33 @@ Entity::~Entity(){
 
 void Entity::draw(){
     
+	if(isCircle){
+	glColor3d(1,1,1);
     glPointSize(radius);
     // Draw something
     glBegin(GL_POINTS);
     glVertex2f(x, y);
     glEnd();
+	glColor3d(0,0,0);
+	}else{
+	glPointSize(length);
+	glColor3d(1,1,1);	
+	glBegin(GL_POLYGON);
+    glVertex2f(x-length/2, y+width/2);
+	glVertex2f(x+length/2, y+width/2);
+	glVertex2f(x+length/2, y-width/2);
+	glVertex2f(x-length/2, y-width/2);
+    glEnd();	
+	glColor3d(0,0,0);
+	}
+		
+	
+
+
+
+	
+	
+	
 
     //MAYBE A TEXTURE
     /*

@@ -3,6 +3,9 @@
 #include "Entity.h"
 #define DIAG_VSPEED  0.70710678118; 
 
+enum weapon { pistol, shotgun, mini };
+
+
 class Actor: public Entity{
 
 public:
@@ -10,7 +13,8 @@ public:
     float vy;
     float speed;
     int health;
-
+    weapon gun = pistol;
+	
     Actor();
     ~Actor();
     

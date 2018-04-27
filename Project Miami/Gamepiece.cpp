@@ -7,6 +7,10 @@ Gamepiece::Gamepiece(){
     gm->addGP(this);
     x = 0.0;
     y = 0.0;
+	px = 0.0;
+	py = 0.0;
+	nx = 0.0;
+	ny = 0.0;
     init();
 }
 
