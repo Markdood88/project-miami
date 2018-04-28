@@ -24,9 +24,12 @@ void Game::init(){
     Player* p = new Player();
     Player* p2 = new Player();
 	Entity* wall = new Entity(false);
+	Entity* wall1 = new Entity(false);
 	wall->type = environment;
+	wall1->type = environment;
 	wall->x = .5;
 	wall->y = .5;
+	wall1->x = .5;
 
 }
 
@@ -43,7 +46,7 @@ void Game::update(int delta){
 	
     example->moveL();
 
-    checkPlayerWallCollision();
+    
     if (hero->up ){
         hero->moveU();
     }
@@ -95,17 +98,19 @@ void Game::removeGP(Gamepiece* toErase){
 }
 
 void Game::checkCollisions(){
-    for(int i = 1; i < gp.size(); i++){
+    for(int i = 0; i < gp.size(); i++){
 		for(int j = i+1; j <gp.size(); j++){
-			if(collides(gp[i], gp[j]) && i != j &&  (gp[i]->type != bullet && gp[i]->type != bullet)  ){
-				
-				std::cout<<j<<" HIT "<<i<<std::endl;
+			
+			//environment collision for players
+			if(collides(gp[i], gp[j]) && gp[j]->type == environment  ){//this collides function should be one specifically for walls
+				gp[i]->x=gp[i]->px;
+				gp[i]->y=gp[i]->py;
+			}	
+			//remove bullets that hit things
+			if(collides(gp[i], gp[j]) && i != j && i!=0 && (gp[i]->type != bullet && gp[i]->type != bullet)  ){
+				removeGP(gp[j]);
 			}
-			if(collides(gp[0], gp[j]) && gp[j]->type == environment  ){//this collides function should be for walls
-				std::cout<<j<<" WALL "<<std::endl;
-				gp[0]->x=gp[0]->px;
-				gp[0]->y=gp[0]->py;
-			}				
+			
 			
 		}
 	}

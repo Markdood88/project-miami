@@ -23,7 +23,7 @@ public:
     bool isCircle = true;
     float radius;
     float length;
-    float width;
+    float height;
     float r;
     float g;
     float b;

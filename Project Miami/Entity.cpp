@@ -2,7 +2,7 @@
 
 Entity::Entity(){
     radius = 40;
-   r = 1.0;
+    r = 1.0;
     g = 0.0;
     b = 0.0;
 }
@@ -19,7 +19,7 @@ Entity::Entity(bool c){
     }
     else{
     length = .1;
-    width = .1;        
+    height = .1;        
     }
 }
 
@@ -41,10 +41,10 @@ void Entity::draw(){
 	glPointSize(length);
 	glColor3d(1,1,1);	
 	glBegin(GL_POLYGON);
-    glVertex2f(x-length/2, y+width/2);
-	glVertex2f(x+length/2, y+width/2);
-	glVertex2f(x+length/2, y-width/2);
-	glVertex2f(x-length/2, y-width/2);
+    glVertex2f(x-length/2, y+height/2);
+	glVertex2f(x+length/2, y+height/2);
+	glVertex2f(x+length/2, y-height/2);
+	glVertex2f(x-length/2, y-height/2);
     glEnd();	
 	glColor3d(0,0,0);
 	}

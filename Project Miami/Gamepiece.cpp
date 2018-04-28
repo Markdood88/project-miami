@@ -9,8 +9,7 @@ Gamepiece::Gamepiece(){
     y = 0.0;
 	px = 0.0;
 	py = 0.0;
-	nx = 0.0;
-	ny = 0.0;
+
     init();
 }
 

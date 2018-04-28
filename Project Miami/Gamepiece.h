@@ -13,8 +13,7 @@ public:
     float y;
 	float px;
 	float py;
-	float nx;
-	float ny;
+
 	Type type;
 
     Gamepiece();
