@@ -17,16 +17,16 @@ void Actor::init(){
 
 void Actor::shoot(float y1, float x1, float y2, float x2){
     if (gun == shotgun){
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2), 1000,.003, .01);
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2)+.05, 1000,.003,.01);
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2)+.1, 1000,.003,.01);
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2)-.05, 1000,.003,.01);
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2)-.1, 1000,.003,.01);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2), 250,.003, .01);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2)+.05, 250,.003,.01);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2)+.1, 250,.003,.01);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2)-.05, 250,.003,.01);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2)-.1, 250,.003,.01);
 
     }
 
     if (gun == pistol){
-        new Projectile(x2,y2, atan2(y1- y2,x1-x2), 1000,.002,.02);
+        new Projectile(x2,y2, atan2(y1- y2,x1-x2), 1250,.002,.02);
     }
 }
 

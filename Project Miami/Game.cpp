@@ -28,6 +28,11 @@ void Game::init(){
 	Player* p3 = new Player();
 	Player* p4 = new Player();
 	Player* p5 = new Player();
+	Player* p6 = new Player();
+	Player* p7 = new Player();
+	Player* p8 = new Player();
+	Player* p9 = new Player();
+	Player* p10 = new Player();
 	p2->type=baddy;
 	p2->moveL();
 	p3->type=baddy;
@@ -36,6 +41,16 @@ void Game::init(){
 	p4->moveL();
 	p5->type=baddy;
 	p5->moveL();
+	p6->type=baddy;
+	p6->moveL();
+	p7->type=baddy;
+	p7->moveL();
+	p8->type=baddy;
+	p8->moveL();
+	p9->type=baddy;
+	p9->moveL();
+	p10->type=baddy;
+	p10->moveL();
 
 	std::vector<Entity*> walls;
 	for(int i = 0; i <=20; i+=1){
