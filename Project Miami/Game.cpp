@@ -2,6 +2,7 @@
 #include <stdio.h>
 Game* Game::instance = 0;
 
+
 Game* Game::getGame(){
     if(instance == 0){
         instance = new Game();
@@ -23,13 +24,34 @@ void Game::init(){
     // from their constructors. we shall see
     Player* p = new Player();
     Player* p2 = new Player();
-	Entity* wall = new Entity(false);
-	Entity* wall1 = new Entity(false);
-	wall->type = environment;
-	wall1->type = environment;
-	wall->x = .5;
-	wall->y = .5;
-	wall1->x = .5;
+	
+	Player* p3 = new Player();
+	Player* p4 = new Player();
+	Player* p5 = new Player();
+	p2->type=baddy;
+	p2->moveL();
+	p3->type=baddy;
+	p3->moveL();
+	p4->type=baddy;
+	p4->moveL();
+	p5->type=baddy;
+	p5->moveL();
+
+	std::vector<Entity*> walls;
+	for(int i = 0; i <=20; i+=1){
+		walls.push_back(new Entity(false));
+		walls[i]->x = -1+double(i)/10;
+		walls[i]->y = .8;
+		walls[i]->type = environment;
+	}
+
+	for(int i = 0; i <=20; i+=1){
+		walls.push_back(new Entity(false));
+		walls[i+21]->x = -1+double(i)/10;
+		walls[i+21]->y = -.8;
+		walls[i+21]->type = environment;
+	}	
+
 
 }
 
@@ -38,15 +60,39 @@ void Game::update(int delta){
     // delta is milliseconds elapsed since last frame
 	
     Player* hero = dynamic_cast<Player*>(gp[0]);
-    Player* example = dynamic_cast<Player*>(gp[1]);
+  srand (time(NULL));
+  
 
+	for(int i = 0; i < gp.size(); i++){
+
+		if(gp[i]-> type == baddy){
+			Player* bad = dynamic_cast<Player*>(gp[i]);
+			
+			int random = rand() % 4;
+			
+			if (random == 0){
+				bad->moveU();
+			}
+			if (random == 1 ){
+				bad->moveD();
+			}
+			if (random == 2 ){
+				bad->moveL();
+			}
+			if (random == 3 ){
+				bad->moveR();
+			}
+		
+		}
+		
+	}
 	
 	checkCollisions();
 
 	
-    example->moveL();
-
     
+
+   
     if (hero->up ){
         hero->moveU();
     }
@@ -64,7 +110,6 @@ void Game::update(int delta){
     for(int i = 0; i < gp.size(); i++)
         gp[i]->update(delta);
     
-
 }
 
 void Game::draw(){
@@ -101,15 +146,26 @@ void Game::checkCollisions(){
     for(int i = 0; i < gp.size(); i++){
 		for(int j = i+1; j <gp.size(); j++){
 			
-			//environment collision for players
-			if(collides(gp[i], gp[j]) && gp[j]->type == environment  ){//this collides function should be one specifically for walls
-				gp[i]->x=gp[i]->px;
-				gp[i]->y=gp[i]->py;
-			}	
-			//remove bullets that hit things
-			if(collides(gp[i], gp[j]) && i != j && i!=0 && (gp[i]->type != bullet && gp[i]->type != bullet)  ){
-				removeGP(gp[j]);
+			
+			if(collides(gp[i], gp[j])){
+				if(gp[j]->type == environment){
+					gp[i]->x=gp[i]->px;
+					gp[i]->y=gp[i]->py;						
+				}
+				
+				if(i != 0){
+					if(gp[j]->type == bullet){
+						if(gp[i]->type == baddy){
+							removeGP(gp[i]);
+						}
+						if(gp[i]->type != bullet){
+							removeGP(gp[j]);
+						}
+					}
+				}
 			}
+			
+			
 			
 			
 		}
