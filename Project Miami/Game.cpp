@@ -22,38 +22,20 @@ void Game::init(){
     // initializes every gamepiece
     // may not be necessary if we gamepieces calls their own inits
     // from their constructors. we shall see
-    Player* p = new Player();
-    Player* p2 = new Player();
-	
-	Player* p3 = new Player();
-	Player* p4 = new Player();
-	Player* p5 = new Player();
-	Player* p6 = new Player();
-	Player* p7 = new Player();
-	Player* p8 = new Player();
-	Player* p9 = new Player();
-	Player* p10 = new Player();
-	p2->type=baddy;
-	p2->moveL();
-	p3->type=baddy;
-	p3->moveL();
-	p4->type=baddy;
-	p4->moveL();
-	p5->type=baddy;
-	p5->moveL();
-	p6->type=baddy;
-	p6->moveL();
-	p7->type=baddy;
-	p7->moveL();
-	p8->type=baddy;
-	p8->moveL();
-	p9->type=baddy;
-	p9->moveL();
-	p10->type=baddy;
-	p10->moveL();
 
+	Player* Hero = new Player();
+	Hero->type = hero;
+	
 	std::vector<Entity*> walls;
+	std::vector<Player*> players;
+	
+	for(int i = 0; i <20; i+=1){
+		players.push_back(new Player());
+		players[i]->type = baddy;
+	}
+	
 	for(int i = 0; i <=20; i+=1){
+		walls.push_back(new Entity(false));
 		walls.push_back(new Entity(false));
 		walls[i]->x = -1+double(i)/10;
 		walls[i]->y = .8;
@@ -61,12 +43,10 @@ void Game::init(){
 	}
 
 	for(int i = 0; i <=20; i+=1){
-		walls.push_back(new Entity(false));
 		walls[i+21]->x = -1+double(i)/10;
 		walls[i+21]->y = -.8;
 		walls[i+21]->type = environment;
 	}	
-
 
 }
 
@@ -75,53 +55,37 @@ void Game::update(int delta){
     // delta is milliseconds elapsed since last frame
 	
     Player* hero = dynamic_cast<Player*>(gp[0]);
-  srand (time(NULL));
-  
-
+	
+	//baddy movement
+	srand (time(NULL));
 	for(int i = 0; i < gp.size(); i++){
-
 		if(gp[i]-> type == baddy){
 			Player* bad = dynamic_cast<Player*>(gp[i]);
-			
 			int random = rand() % 4;
-			
-			if (random == 0){
+			if (random == 0)
 				bad->moveU();
-			}
-			if (random == 1 ){
+			if (random == 1 )
 				bad->moveD();
-			}
-			if (random == 2 ){
+			if (random == 2 )
 				bad->moveL();
-			}
-			if (random == 3 ){
+			if (random == 3 )
 				bad->moveR();
-			}
-		
 		}
-		
 	}
 	
 	checkCollisions();
 
-	
-    
-
-   
-    if (hero->up ){
+	//hero movements
+    if (hero->up )
         hero->moveU();
-    }
-    if (hero->down ){
+    if (hero->down )
        hero->moveD();
-    }
-    if (hero->left ){
+    if (hero->left )
         hero->moveL();
-    }
-    if (hero->right ){
+    if (hero->right )
        hero->moveR();
-    }
 
-	
+	//update every gamepiece
     for(int i = 0; i < gp.size(); i++)
         gp[i]->update(delta);
     
@@ -171,7 +135,7 @@ void Game::checkCollisions(){
 				if(i != 0){
 					if(gp[j]->type == bullet){
 						if(gp[i]->type == baddy){
-							removeGP(gp[i]);
+							removeGP(gp[i]);//should be decrease health// then if health == 0
 						}
 						if(gp[i]->type != bullet){
 							removeGP(gp[j]);
@@ -194,5 +158,3 @@ void Game::checkCollisions(){
 	return (D<.08);
 
  }
-	 
-	 
